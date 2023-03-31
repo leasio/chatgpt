@@ -2,17 +2,19 @@ import * as React from "react";
 import * as fs from "fs";
 import Koa from "koa";
 import Router from "koa-router";
+// 解析request的body的功能(post请求)
+import bodyParser from "koa-bodyparser";
 import koaStatic from "koa-static";
 import * as ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
-import api from './apis'
+import api from "./apis";
 import App from "./App";
 
 const app = new Koa();
 const router = new Router();
 
 const template = fs.readFileSync("public/template.html", "utf8");
-const port = process.env.PORT || 50000
+const port = process.env.PORT || 3000;
 
 app.use(
   koaStatic("dist", {
@@ -22,17 +24,17 @@ app.use(
 );
 
 router.post("/api/chat", async (ctx: any) => {
-  console.log(ctx)
+  try {
+    const response = await api.createChatCompletion(ctx.request.body);
 
-  ctx.body = { code: 0 }
+    ctx.body = response.data;
+  } catch (e) {
+    ctx.body = e;
+  }
+});
 
-  // try {
-  //   const response = await api.createChatCompletion(ctx.query)
-  //   console.log("response:", response)
-  //   // ctx.body = response.data
-  // } catch (e) {
-  //   ctx.body = e
-  // }
+router.get("/api/chat", async (ctx: any) => {
+  ctx.body = "none";
 });
 
 router.get("(.*)", (ctx: any) => {
@@ -45,6 +47,7 @@ router.get("(.*)", (ctx: any) => {
   ctx.type = "html";
 });
 
+app.use(bodyParser());
 app.use(router.routes());
 
 app.listen(port);
