@@ -1,0 +1,12 @@
+# Mac OS
+.DS_Store
+
+# NPM
+/node_modules
+npm-*
+
+# Build
+/dist
+
+# config
+/config/openai.js
