@@ -1,6 +1,15 @@
 import React from "react";
 
 const App: React.FC = () => {
+  const send = () => {
+    fetch("/api/chat", {
+      method: 'post',
+      body: JSON.stringify({
+        messages: [{"role": "user", "content": "Hello!"}]
+    })
+    })
+  }
+  
   return <div className="w-screen h-screen">
     <div className="h-full transition-all p-4">
       <div className="h-full overflow-hidden border rounded-md shadow-md">
@@ -51,7 +60,7 @@ const App: React.FC = () => {
           <footer className="p-4">
             <div className="flex items-center justify-between space-x-2">
               <input className="flex-1 block w-full h-10 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 focus:h-10 focus-visible:outline-none resize-none px-3 py-2" type="text" placeholder="开聊~" />
-              <button className="text-white min-w-10 h-10 rounded-md px-3 ml-1 bg-blue-500">发送</button>
+              <button className="text-white min-w-10 h-10 rounded-md px-3 ml-1 bg-blue-500" onClick={send}>发送</button>
             </div>
           </footer>
         </div>

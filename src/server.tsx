@@ -12,7 +12,7 @@ const app = new Koa();
 const router = new Router();
 
 const template = fs.readFileSync("public/template.html", "utf8");
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 50000
 
 app.use(
   koaStatic("dist", {
@@ -21,14 +21,18 @@ app.use(
   })
 );
 
-router.get("/api/:method", async (ctx: any) => {
-  console.log(ctx.params, ctx.query);
-  try {
-    const response = await api.listEngines()
-    ctx.body = response
-  } catch (e) {
-    ctx.body = e
-  }
+router.post("/api/chat", async (ctx: any) => {
+  console.log(ctx)
+
+  ctx.body = { code: 0 }
+
+  // try {
+  //   const response = await api.createChatCompletion(ctx.query)
+  //   console.log("response:", response)
+  //   // ctx.body = response.data
+  // } catch (e) {
+  //   ctx.body = e
+  // }
 });
 
 router.get("(.*)", (ctx: any) => {
