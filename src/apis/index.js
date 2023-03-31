@@ -15,10 +15,10 @@ class Api {
         this.openai = new OpenAIApi(configuration);
     }
 
-    createChatCompletion(messages) {
+    createChatCompletion(params) {
         return this.openai?.createChatCompletion({
             ...options,
-            messages
+            ...params
         })
     }
 }

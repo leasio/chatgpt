@@ -33,10 +33,6 @@ router.post("/api/chat", async (ctx: any) => {
   }
 });
 
-router.get("/api/chat", async (ctx: any) => {
-  ctx.body = "none";
-});
-
 router.get("(.*)", (ctx: any) => {
   const str = ReactDOMServer.renderToString(
     <StaticRouter location={ctx.req.url}>
