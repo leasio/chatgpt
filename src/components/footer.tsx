@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ChatCompletionRequestMessage,
   CreateChatCompletionResponseChoicesInner,
@@ -6,6 +6,7 @@ import {
 import { useChatContext } from "@/context/chat";
 
 const Footer: React.FC = () => {
+  const enterRef = useRef<HTMLButtonElement>(null);
   const { messages, setMessages } = useChatContext();
   const [value, setValue] = useState<string>("");
 
@@ -38,7 +39,6 @@ const Footer: React.FC = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("data:", data);
         setMessages([
           ..._messages,
           ...data?.choices.map(
@@ -47,6 +47,23 @@ const Footer: React.FC = () => {
         ]);
       });
   };
+
+  useEffect(() => {
+    window.onkeydown = (event) => {
+      switch (event.keyCode) {
+        default:
+          break;
+        case 13: // Enter
+          event.preventDefault();
+          enterRef.current?.click();
+          break;
+      }
+    };
+
+    return () => {
+      window.onkeydown = null;
+    };
+  }, []);
 
   return (
     <footer className="p-4">
@@ -61,6 +78,7 @@ const Footer: React.FC = () => {
         <button
           className="text-white min-w-10 h-10 rounded-md px-3 ml-1 bg-blue-500 hover:bg-blue-600"
           onClick={send}
+          ref={enterRef}
         >
           发送
         </button>
