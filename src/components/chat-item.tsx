@@ -1,5 +1,6 @@
 import React from "react";
 import { ChatCompletionRequestMessage } from "openai";
+import { markdown } from "@/utils/markdown";
 
 interface Props {
   message: ChatCompletionRequestMessage;
@@ -25,11 +26,11 @@ const ChatItem: React.FC<Props> = ({ message }) => {
       </div>
       <div className="overflow-hidden text-sm items-end">
         <div
-          className={` text-wrap min-w-5 rounded-md px-3 py-2  ${
+          className={`min-w-5 rounded-md px-3 py-2  ${
             isUser ? "bg-blue-500 text-white" : "bg-gray-100 text-black"
           }`}
           dangerouslySetInnerHTML={{
-            __html: message.content?.replace(/\n/g, "<br />"),
+            __html: isUser ? message.content : markdown.render(message.content),
           }}
         ></div>
       </div>

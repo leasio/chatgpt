@@ -8,5 +8,8 @@ npm-*
 # Build
 /dist
 
+# Logs
+*.log
+
 # config
 /config/openai.js
