@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 
+const LIMIT_NUM = 3;
+
 interface Props {
   onClick: () => void;
 }
 
-const Enter: React.FC<Props> = ({ onClick }) => {
+const Enter: React.FC<Props> = (props) => {
   const [isHover, setIsHover] = useState<boolean>(false);
+  const [count, setCount] = useState<number>(LIMIT_NUM - 1);
+
+  const onClick = () => {
+    if (!count) {
+      props.onClick();
+    }
+
+    setCount(count - 1);
+  };
 
   return (
     <button
