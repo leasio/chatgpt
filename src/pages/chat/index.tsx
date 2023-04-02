@@ -37,7 +37,7 @@ const Chat: React.FC = () => {
       <div className="flex-1 flex flex-col">
         <main className="flex-1 flex overflow-hidden">
           <div
-            className="h-full overflow-hidden overflow-y-auto"
+            className="w-full h-full overflow-hidden overflow-y-auto"
             ref={scrollRef}
           >
             <div className="w-full max-w-screen-xl m-auto p-4">
