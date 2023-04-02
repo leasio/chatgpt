@@ -7,9 +7,10 @@ const Images: React.FC = () => {
   const [options, setOptions] = useState<Options>({});
   const [isLoading, setIsLoading] = useState<boolean>(false); // 是否加载中
 
+  // 图片尺寸在图片更新的时候更新
   const [imgW, imgH] = useMemo(() => {
     return options.size?.split("x") ?? [256, 256];
-  }, [options.size]);
+  }, [images]);
 
   return (
     <imagesContext.Provider
