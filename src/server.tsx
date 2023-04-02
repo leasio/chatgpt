@@ -23,9 +23,21 @@ app.use(
   })
 );
 
+// 接口：对话
 router.post("/api/chat", async (ctx: any) => {
   try {
     const response = await api.createChatCompletion(ctx.request.body);
+
+    ctx.body = response.data;
+  } catch (e: any) {
+    ctx.body = e;
+  }
+});
+
+// 接口：图片
+router.post("/api/images", async (ctx: any) => {
+  try {
+    const response = await api.createImage(ctx.request.body);
 
     ctx.body = response.data;
   } catch (e: any) {

@@ -26,30 +26,21 @@ const Chat: React.FC = () => {
         setIsLoading,
       }}
     >
-      <div className="h-full transition-all p-4">
-        <div className="h-full overflow-hidden border rounded-md shadow-md">
-          <div className="flex flex-col w-full h-full">
-            <main className="flex-1 overflow-hidden">
-              <div
-                className="h-full overflow-hidden overflow-y-auto"
-                ref={scrollRef}
-              >
-                <div className="w-full max-w-screen-xl m-auto p-4">
-                  {messages?.map((message, index) => (
-                    <ChatItem message={message} key={index} />
-                  ))}
+      <main className="flex-1 overflow-hidden">
+        <div className="h-full overflow-hidden overflow-y-auto" ref={scrollRef}>
+          <div className="w-full max-w-screen-xl m-auto p-4">
+            {messages?.map((message, index) => (
+              <ChatItem message={message} key={index} />
+            ))}
 
-                  {isLoading && (
-                    <ChatItem message={{ role: "assistant", content: "" }} />
-                  )}
-                </div>
-              </div>
-            </main>
-
-            <Footer />
+            {isLoading && (
+              <ChatItem message={{ role: "assistant", content: "" }} />
+            )}
           </div>
         </div>
-      </div>
+      </main>
+
+      <Footer />
     </chatContext.Provider>
   );
 };

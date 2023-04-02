@@ -1,18 +1,16 @@
 import React, { useState } from "react";
+import { useAppContext, PAGES } from "@/context/app";
 
 const LIMIT_NUM = 3;
 
-interface Props {
-  onClick: () => void;
-}
-
-const Enter: React.FC<Props> = (props) => {
+const Enter: React.FC = () => {
+  const { setPage } = useAppContext();
   const [isHover, setIsHover] = useState<boolean>(false);
   const [count, setCount] = useState<number>(LIMIT_NUM - 1);
 
   const onClick = () => {
     if (!count) {
-      props.onClick();
+      setPage(PAGES.CHAT);
     }
 
     setCount(count - 1);
