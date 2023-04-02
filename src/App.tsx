@@ -30,7 +30,7 @@ const App: React.FC = () => {
         <div className="w-screen h-screen">
           <div className="h-full transition-all p-4">
             <div className="h-full overflow-hidden border rounded-md shadow-md">
-              <div className="flex flex-col w-full h-full">{renderPage()}</div>
+              <div className="flex w-full h-full">{renderPage()}</div>
             </div>
           </div>
         </div>

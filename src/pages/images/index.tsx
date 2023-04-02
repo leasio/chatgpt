@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Options, Image, imagesContext } from "@/context/images";
-import Header from "@/components/images/header";
+import Sider from "@/components/images/sider";
 import Footer from "@/components/images/footer";
 
 const DEFAULT_OPTIONS: Options = {
@@ -24,30 +24,32 @@ const Images: React.FC = () => {
         setIsLoading,
       }}
     >
-      <Header />
+      <Sider />
 
-      <main className="flex-1 justify-center overflow-hidden">
-        {isLoading ? (
-          <div className="flex items-center justify-center h-full">
-            <div className="w-8 h-8 rounded-full border-4 border-t-gray-300 border-r-gray-300 border-b-blue-400 border-l-blue-400 animate-spin"></div>
-          </div>
-        ) : (
-          <div className="flex flex-wrap p-4 max-h-full overflow-hidden overflow-y-auto">
-            {images.map((image, index) => {
-              return (
-                <img
-                  className="mr-2 mb-2"
-                  src={image.url}
-                  alt={image.alt}
-                  key={index}
-                />
-              );
-            })}
-          </div>
-        )}
-      </main>
+      <div className="flex-1 flex flex-col">
+        <main className="flex-1 justify-center overflow-hidden">
+          {isLoading ? (
+            <div className="flex items-center justify-center h-full">
+              <div className="w-8 h-8 rounded-full border-4 border-t-gray-300 border-r-gray-300 border-b-blue-400 border-l-blue-400 animate-spin"></div>
+            </div>
+          ) : (
+            <div className="flex flex-wrap p-4 max-h-full overflow-hidden overflow-y-auto">
+              {images.map((image, index) => {
+                return (
+                  <img
+                    className="mr-2 mb-2"
+                    src={image.url}
+                    alt={image.alt}
+                    key={index}
+                  />
+                );
+              })}
+            </div>
+          )}
+        </main>
 
-      <Footer />
+        <Footer />
+      </div>
     </imagesContext.Provider>
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ChatCompletionRequestMessage } from "openai";
 import { chatContext } from "@/context/chat";
 import ChatItem from "@/components/chat/chat-item";
-import Header from "@/components/chat/header";
+import Sider from "@/components/chat/sider";
 import Footer from "@/components/chat/footer";
 import "./markdown.less";
 
@@ -32,23 +32,28 @@ const Chat: React.FC = () => {
         setIsLoading,
       }}
     >
-      <Header />
+      <Sider />
 
-      <main className="flex-1 overflow-hidden">
-        <div className="h-full overflow-hidden overflow-y-auto" ref={scrollRef}>
-          <div className="w-full max-w-screen-xl m-auto p-4">
-            {messages?.map((message, index) => (
-              <ChatItem message={message} key={index} />
-            ))}
+      <div className="flex-1 flex flex-col">
+        <main className="flex-1 flex overflow-hidden">
+          <div
+            className="h-full overflow-hidden overflow-y-auto"
+            ref={scrollRef}
+          >
+            <div className="w-full max-w-screen-xl m-auto p-4">
+              {messages?.map((message, index) => (
+                <ChatItem message={message} key={index} />
+              ))}
 
-            {isLoading && (
-              <ChatItem message={{ role: "assistant", content: "" }} />
-            )}
+              {isLoading && (
+                <ChatItem message={{ role: "assistant", content: "" }} />
+              )}
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
 
-      <Footer />
+        <Footer />
+      </div>
     </chatContext.Provider>
   );
 };
