@@ -37,12 +37,13 @@ const Footer: React.FC = () => {
         return response.json();
       })
       .then((data) => {
-        setMessages([
-          ..._messages,
-          ...data?.choices.map(
-            (o: CreateChatCompletionResponseChoicesInner) => o.message
-          ),
-        ]);
+        const newMsg = data.id
+          ? data?.choices.map(
+              (o: CreateChatCompletionResponseChoicesInner) => o.message
+            )
+          : [{ role: "system", content: data.message }];
+
+        setMessages([..._messages, ...newMsg]);
       })
       .finally(() => {
         setIsLoading(false);
@@ -87,14 +88,11 @@ const Footer: React.FC = () => {
         </button>
 
         <input
-          className={`flex-1 block w-full h-10 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 focus:h-10 focus-visible:outline-none resize-none px-3 py-2 ${
-            isLoading ? "bg-gray-200 cursor-not-allowed" : ""
-          }`}
+          className="flex-1 block w-full h-10 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 focus:h-10 focus-visible:outline-none resize-none px-3 py-2"
           type="text"
           placeholder="开聊~"
           value={userCurrentMsg}
           onChange={(e) => serUserCurrentMsg(e.target?.value)}
-          disabled={isLoading}
         />
 
         <button

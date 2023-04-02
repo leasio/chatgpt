@@ -28,7 +28,7 @@ router.post("/api/chat", async (ctx: any) => {
     const response = await api.createChatCompletion(ctx.request.body);
 
     ctx.body = response.data;
-  } catch (e) {
+  } catch (e: any) {
     ctx.body = e;
   }
 });
