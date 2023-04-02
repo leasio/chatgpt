@@ -7,9 +7,8 @@ import { useChatContext } from "@/context/chat";
 
 const Footer: React.FC = () => {
   const enterRef = useRef<HTMLButtonElement>(null);
-  const { messages, setMessages } = useChatContext(); // 对话列表
+  const { messages, setMessages, isLoading, setIsLoading } = useChatContext();
   const [userCurrentMsg, serUserCurrentMsg] = useState<string>(""); // 用户当前对话
-  const [isLoading, setIsLoading] = useState<boolean>(false); // 是否加载中
 
   // 发送：继续话题
   const send = () => {
@@ -77,7 +76,7 @@ const Footer: React.FC = () => {
     <footer className="p-4">
       <div className="flex items-center justify-between space-x-2">
         <button
-          className={`text-black min-w-10 h-10 rounded-md px-3 mr-1 ring-1 ring-inset ring-gray-300 ${
+          className={`text-black min-w-10 h-10 rounded-md px-3 mr-1 ring-1 ring-inset ring-gray-300 focus-visible:outline-none ${
             isLoading
               ? "text-gray-500 bg-gray-200 cursor-not-allowed"
               : "hover:text-blue-600 hover:ring-blue-400"
@@ -99,7 +98,7 @@ const Footer: React.FC = () => {
         />
 
         <button
-          className={`text-white min-w-10 h-10 rounded-md px-3 ml-1 bg-blue-500 ${
+          className={`text-white min-w-10 h-10 rounded-md px-3 ml-1 bg-blue-500 focus-visible:outline-none ${
             isLoading || !userCurrentMsg
               ? "text-gray-500 bg-gray-200 cursor-not-allowed"
               : "hover:bg-blue-600"

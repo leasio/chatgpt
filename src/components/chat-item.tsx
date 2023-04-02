@@ -29,10 +29,19 @@ const ChatItem: React.FC<Props> = ({ message }) => {
           className={`min-w-5 rounded-md px-3 py-2  ${
             isUser ? "bg-blue-500 text-white" : "bg-gray-100 text-black"
           }`}
-          dangerouslySetInnerHTML={{
-            __html: isUser ? message.content : markdown.render(message.content),
-          }}
-        ></div>
+        >
+          {message.content ? (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: isUser
+                  ? message.content
+                  : markdown.render(message.content),
+              }}
+            ></div>
+          ) : (
+            <div className="w-5 h-5 rounded-full border-4 border-t-gray-300 border-r-gray-300 border-b-blue-400 border-l-blue-400 animate-spin"></div>
+          )}
+        </div>
       </div>
     </div>
   );

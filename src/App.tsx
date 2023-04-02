@@ -6,7 +6,8 @@ import Footer from "@/components/footer";
 
 const App: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
+  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]); // 对话列表
+  const [isLoading, setIsLoading] = useState<boolean>(false); // 是否加载中
 
   useEffect(() => {
     scrollRef.current?.scrollTo({
@@ -20,6 +21,8 @@ const App: React.FC = () => {
       value={{
         messages,
         setMessages,
+        isLoading,
+        setIsLoading,
       }}
     >
       <div className="w-screen h-screen">
@@ -35,6 +38,10 @@ const App: React.FC = () => {
                     {messages?.map((message, index) => (
                       <ChatItem message={message} key={index} />
                     ))}
+
+                    {isLoading && (
+                      <ChatItem message={{ role: "assistant", content: "" }} />
+                    )}
                   </div>
                 </div>
               </main>
