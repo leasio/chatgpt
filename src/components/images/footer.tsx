@@ -5,11 +5,19 @@ import { useImagesContext } from "@/context/images";
 const NUM_MAP = new Array(10).fill({});
 const SIZE_MAP = ["256x256", "512x512", "1024x1024"];
 
+export interface Options {
+  n?: number;
+  size?: string;
+}
+
 const Footer: React.FC = () => {
   const enterRef = useRef<HTMLButtonElement>(null);
   const { setPage } = useAppContext();
-  const { setImages, options, setOptions, isLoading, setIsLoading } =
-    useImagesContext();
+  const { setImages, isLoading, setIsLoading } = useImagesContext();
+  const [options, setOptions] = useState<Options>({
+    n: 1,
+    size: "256x256",
+  });
   const [prompt, setPrompt] = useState<string>(""); // 用户对图片的要求
 
   // 发送：生成图片

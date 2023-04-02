@@ -1,24 +1,16 @@
-import React, { useMemo, useState } from "react";
-import { imagesContext, Image, Options } from "@/context/images";
+import React, { useState } from "react";
+import { imagesContext, Image } from "@/context/images";
 import Footer from "@/components/images/footer";
 
 const Images: React.FC = () => {
   const [images, setImages] = useState<Image[]>([]);
-  const [options, setOptions] = useState<Options>({});
   const [isLoading, setIsLoading] = useState<boolean>(false); // 是否加载中
-
-  // 图片尺寸在图片更新的时候更新
-  const [imgW, imgH] = useMemo(() => {
-    return options.size?.split("x") ?? [256, 256];
-  }, [images]);
 
   return (
     <imagesContext.Provider
       value={{
         images,
         setImages,
-        options,
-        setOptions,
         isLoading,
         setIsLoading,
       }}
@@ -34,8 +26,6 @@ const Images: React.FC = () => {
               return (
                 <img
                   className="mr-2 mb-2"
-                  width={imgW}
-                  height={imgH}
                   src={image.url}
                   alt={image.alt}
                   key={index}
