@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { appContext, PAGES } from "@/context/app";
+import { PAGES, appContext } from "@/context/app";
 import Enter from "@/components/common/enter";
 import Chat from "@/pages/chat";
 import Images from "@/pages/images";

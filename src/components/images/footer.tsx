@@ -1,23 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useAppContext, PAGES } from "@/context/app";
 import { useImagesContext } from "@/context/images";
-
-const NUM_MAP = new Array(10).fill({});
-const SIZE_MAP = ["256x256", "512x512", "1024x1024"];
-
-export interface Options {
-  n?: number;
-  size?: string;
-}
 
 const Footer: React.FC = () => {
   const enterRef = useRef<HTMLButtonElement>(null);
-  const { setPage } = useAppContext();
-  const { setImages, isLoading, setIsLoading } = useImagesContext();
-  const [options, setOptions] = useState<Options>({
-    n: 1,
-    size: "256x256",
-  });
+  const { options, setImages, isLoading, setIsLoading } = useImagesContext();
   const [prompt, setPrompt] = useState<string>(""); // 用户对图片的要求
 
   // 发送：生成图片
@@ -67,47 +53,6 @@ const Footer: React.FC = () => {
   return (
     <footer className="border-t-2 shadow-inner p-4">
       <div className="flex items-center justify-between space-x-2">
-        <button
-          className="text-black min-w-10 h-10 rounded-md px-3 ring-1 ring-inset ring-gray-300 focus-visible:outline-none hover:text-blue-600 hover:ring-blue-400"
-          onClick={() => setPage(PAGES.CHAT)}
-        >
-          去聊天
-        </button>
-
-        <div>
-          <label>数量：</label>
-          <select
-            className="h-10 rounded-md px-3 ring-1 ring-inset ring-gray-300 cursor-pointer focus-visible:outline-none hover:ring-blue-400 appearance-none"
-            onChange={(e) =>
-              setOptions({ ...options, n: Number(e.target?.value ?? 1) })
-            }
-          >
-            {NUM_MAP.map((_, index) => {
-              return (
-                <option value={index + 1} key={index}>
-                  {index + 1}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-
-        <div>
-          <label>尺寸：</label>
-          <select
-            className="h-10 rounded-md px-3 ring-1 ring-inset ring-gray-300 cursor-pointer focus-visible:outline-none hover:ring-blue-400 appearance-none"
-            onChange={(e) => setOptions({ ...options, size: e.target?.value })}
-          >
-            {SIZE_MAP.map((v) => {
-              return (
-                <option value={v} key={v}>
-                  {v}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-
         <input
           className="flex-1 block min-w-10 w-full h-10 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 focus:h-10 focus-visible:outline-none resize-none px-3 py-2"
           type="text"

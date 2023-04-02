@@ -2,11 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { ChatCompletionRequestMessage } from "openai";
 import { chatContext } from "@/context/chat";
 import ChatItem from "@/components/chat/chat-item";
+import Header from "@/components/chat/header";
 import Footer from "@/components/chat/footer";
 import "./markdown.less";
 
+const DEFAULT_MODEL: string = "gpt-3.5-turbo";
+
 const Chat: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [model, setModel] = useState<string>(DEFAULT_MODEL); // 对话模型
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]); // 对话列表
   const [isLoading, setIsLoading] = useState<boolean>(false); // 是否加载中
 
@@ -20,12 +24,16 @@ const Chat: React.FC = () => {
   return (
     <chatContext.Provider
       value={{
+        model,
+        setModel,
         messages,
         setMessages,
         isLoading,
         setIsLoading,
       }}
     >
+      <Header />
+
       <main className="flex-1 overflow-hidden">
         <div className="h-full overflow-hidden overflow-y-auto" ref={scrollRef}>
           <div className="w-full max-w-screen-xl m-auto p-4">

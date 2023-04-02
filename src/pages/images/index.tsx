@@ -1,20 +1,31 @@
 import React, { useState } from "react";
-import { imagesContext, Image } from "@/context/images";
+import { Options, Image, imagesContext } from "@/context/images";
+import Header from "@/components/images/header";
 import Footer from "@/components/images/footer";
 
+const DEFAULT_OPTIONS: Options = {
+  n: 1,
+  size: "256x256",
+};
+
 const Images: React.FC = () => {
-  const [images, setImages] = useState<Image[]>([]);
+  const [options, setOptions] = useState<Options>(DEFAULT_OPTIONS);
+  const [images, setImages] = useState<Image[]>([]); // 生成的图片
   const [isLoading, setIsLoading] = useState<boolean>(false); // 是否加载中
 
   return (
     <imagesContext.Provider
       value={{
+        options,
+        setOptions,
         images,
         setImages,
         isLoading,
         setIsLoading,
       }}
     >
+      <Header />
+
       <main className="flex-1 justify-center overflow-hidden">
         {isLoading ? (
           <div className="flex items-center justify-center h-full">

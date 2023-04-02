@@ -2,6 +2,10 @@ import React from "react";
 import { ChatCompletionRequestMessage } from "openai";
 
 export interface ChatContext {
+  /** 当前模型 */
+  model: string;
+  /** 设置模型 */
+  setModel: (model: string) => void;
   /** 当前对话列表 */
   messages: ChatCompletionRequestMessage[];
   /** 设置当前对话列表 */
@@ -11,6 +15,8 @@ export interface ChatContext {
 }
 
 export const chatContext = React.createContext<ChatContext>({
+  model: "",
+  setModel: () => {},
   messages: [],
   setMessages: () => {},
   isLoading: false,

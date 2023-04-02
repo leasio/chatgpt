@@ -1,12 +1,10 @@
 import {
   Configuration,
   OpenAIApi,
-  ChatCompletionRequestMessage,
+  CreateChatCompletionRequest,
   CreateImageRequest,
 } from "openai";
 import { OPENAI_API_KEY } from "../../config/openai";
-
-const CHAT_MODEL = "gpt-3.5-turbo";
 
 class Api {
   openai: any;
@@ -18,10 +16,14 @@ class Api {
     this.openai = new OpenAIApi(configuration);
   }
 
+  // 模型列表
+  listModels() {
+    return this.openai.listModels();
+  }
+
   // 对话
-  createChatCompletion(params: { messages: ChatCompletionRequestMessage[] }) {
+  createChatCompletion(params: CreateChatCompletionRequest) {
     return this.openai?.createChatCompletion({
-      model: CHAT_MODEL,
       ...params,
     });
   }

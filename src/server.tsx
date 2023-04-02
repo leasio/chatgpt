@@ -23,6 +23,17 @@ app.use(
   })
 );
 
+// 接口：模型列表
+router.get("/api/models", async (ctx: any) => {
+  try {
+    const response = await api.listModels();
+
+    ctx.body = response.data;
+  } catch (e: any) {
+    ctx.body = e;
+  }
+});
+
 // 接口：对话
 router.post("/api/chat", async (ctx: any) => {
   try {
