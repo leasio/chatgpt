@@ -10,7 +10,8 @@
     "dev:server": "cross-env NODE_ENV=development webpack --config config/webpack.server.js --watch",
     "build:client": "cross-env NODE_ENV=production webpack --config config/webpack.client.js",
     "build:server": "cross-env NODE_ENV=production webpack --config config/webpack.server.js",
-    "serve": "npm-run-all --parallel \"dev\" \"build:client\" \"build:server\""
+    "build": "npm-run-all --parallel \"dev:client\" \"dev:server\"",
+    "serve": "yarn dev"
   },
   "author": "leasio",
   "license": "ISC",
