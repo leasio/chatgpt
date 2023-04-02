@@ -8,7 +8,6 @@ import MarkdownItAbbr from "markdown-it-abbr";
 import MarkdownItForInline from "markdown-it-for-inline";
 import MarkdownItKatex from "markdown-it-katex";
 import MarkdownItHighlightjs from "markdown-it-highlightjs";
-// import "highlight.js/styles/github.css";
 
 export const markdown = new MarkdownIt({
   html: true,

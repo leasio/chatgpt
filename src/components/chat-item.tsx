@@ -32,6 +32,7 @@ const ChatItem: React.FC<Props> = ({ message }) => {
         >
           {message.content ? (
             <div
+              className="markdown"
               dangerouslySetInnerHTML={{
                 __html: isUser
                   ? message.content

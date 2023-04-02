@@ -3,6 +3,7 @@ import { ChatCompletionRequestMessage } from "openai";
 import { chatContext } from "@/context/chat";
 import ChatItem from "@/components/chat-item";
 import Footer from "@/components/footer";
+import "./markdown.less";
 
 const App: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
