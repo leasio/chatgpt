@@ -4,7 +4,7 @@ import {
   ChatCompletionRequestMessage,
   CreateImageRequest,
 } from "openai";
-import { OPENAI_API_KEY, ORG_ID } from "../../config/openai";
+import { OPENAI_API_KEY } from "../../config/openai";
 
 const CHAT_MODEL = "gpt-3.5-turbo";
 
@@ -13,7 +13,6 @@ class Api {
 
   constructor() {
     const configuration = new Configuration({
-      organization: ORG_ID,
       apiKey: OPENAI_API_KEY,
     });
     this.openai = new OpenAIApi(configuration);
