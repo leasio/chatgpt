@@ -9,14 +9,14 @@ const Enter: React.FC<Props> = ({ onClick }) => {
 
   return (
     <button
-      className={`text-white text-5xl w-96 p-4 rounded-xl focus-visible:outline-none bg-blue-400 hover:bg-red-400 ${
+      className={`text-white text-3xl w-96 p-4 rounded-xl focus-visible:outline-none bg-blue-400 hover:bg-red-400 ${
         isHover ? "" : "animate-bounce"
       }`}
       onClick={onClick}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
-      {isHover ? "别碰我！！！" : "来都来啦..."}
+      {isHover ? "[○･｀Д´･ ○]别碰我！！！" : "O(∩_∩)O~来都来啦..."}
     </button>
   );
 };
