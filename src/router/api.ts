@@ -10,7 +10,10 @@ apiRouter.get("/api/models", async (ctx: any) => {
 
     ctx.body = response.data;
   } catch (e: any) {
-    ctx.body = e;
+    ctx.body = {
+      code: e.code,
+      message: e.message
+    };
   }
 });
 
@@ -21,7 +24,10 @@ apiRouter.post("/api/chat", async (ctx: any) => {
 
     ctx.body = response.data;
   } catch (e: any) {
-    ctx.body = e;
+    ctx.body = {
+      code: e.code,
+      message: e.message
+    };
   }
 });
 
@@ -32,7 +38,10 @@ apiRouter.post("/api/images", async (ctx: any) => {
 
     ctx.body = response.data;
   } catch (e: any) {
-    ctx.body = e;
+    ctx.body = {
+      code: e.code,
+      message: e.message
+    };
   }
 });
 
