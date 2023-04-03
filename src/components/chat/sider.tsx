@@ -19,7 +19,7 @@ const Header: React.FC = () => {
         return response.json();
       })
       .then((data) => {
-        setModels(data.data ?? []);
+        setModels(data.data ?? [{ id: model }]);
       });
   };
 
