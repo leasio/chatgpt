@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { PAGES, useAppContext } from "@/context/app";
 import { useChatContext } from "@/context/chat";
+import Select from "@/components/common/select";
+import Button from "@/components/common/button";
 
 const Header: React.FC = () => {
   const { setPage } = useAppContext();
@@ -32,28 +34,19 @@ const Header: React.FC = () => {
       <div className="border-b-2 mb-4 pb-4 space-y-2">
         <div className="flex items-center">
           <label>模型：</label>
-          <select
-            className="max-w-[158px] flex-1 h-10 rounded-md px-3 ring-1 ring-inset ring-gray-300 cursor-pointer focus-visible:outline-none hover:ring-blue-400 appearance-none"
-            onChange={(e) => setModel(e.target?.value)}
+          <Select 
+            className="max-w-[158px] flex-1"
+            options={models?.map(model => ({ label: model.id, value: model.id }))} 
             value={model}
-          >
-            {models.map((model) => {
-              return (
-                <option value={model.id} key={model.id}>
-                  {model.id}
-                </option>
-              );
-            })}
-          </select>
+            onChange={(e) => setModel(e.target?.value)}
+          />
         </div>
       </div>
 
-      <button
-        className="text-white min-w-10 h-10 rounded-md px-3 bg-blue-500 focus-visible:outline-none hover:bg-blue-600"
+      <Button 
+        btnType="primary" 
         onClick={() => setPage(PAGES.IMAGES)}
-      >
-        去找图
-      </button>
+      >去找图</Button>
     </div>
   );
 };

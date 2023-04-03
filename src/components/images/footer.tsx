@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useImagesContext } from "@/context/images";
+import Button from "@/components/common/button";
+import Input from "@/components/common/Input"
 
 const Footer: React.FC = () => {
   const enterRef = useRef<HTMLButtonElement>(null);
@@ -53,25 +55,18 @@ const Footer: React.FC = () => {
   return (
     <footer className="border-t-2 shadow-inner p-4">
       <div className="flex items-center justify-between space-x-2">
-        <input
-          className="flex-1 block min-w-10 w-full h-10 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 focus:h-10 focus-visible:outline-none resize-none px-3 py-2"
-          type="text"
+        <Input
+          className="flex-1"
           placeholder="我想要画一个不卷的世界~"
           value={prompt}
           onChange={(e) => setPrompt(e.target?.value)}
         />
 
-        <button
-          className={`text-white min-w-10 h-10 rounded-md px-3 bg-blue-500 focus-visible:outline-none ${
-            isLoading || !prompt
-              ? "text-gray-500 bg-gray-200 cursor-not-allowed"
-              : "hover:bg-blue-600"
-          }`}
+        <Button 
+          btnType="primary" 
           onClick={isLoading || !prompt ? undefined : send}
           ref={enterRef}
-        >
-          发送
-        </button>
+        >发送</Button>
       </div>
     </footer>
   );
