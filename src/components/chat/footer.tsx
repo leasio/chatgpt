@@ -32,16 +32,13 @@ const Footer: React.FC = () => {
       messages: _messages,
     })
       .then((data) => {
-        const newMsg = data.id
-          ? data?.choices.map(
+        const newMsg = data.choices
+          ? data.choices.map(
               (o: CreateChatCompletionResponseChoicesInner) => o.message
             )
           : [{ role: "system", content: data.message }];
 
         setMessages([..._messages, ...newMsg]);
-      })
-      .catch(err => {
-        console.log("err", err.json())
       })
       .finally(() => {
         setIsLoading(false);
