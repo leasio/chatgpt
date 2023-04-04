@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import request from "@/utils/request";
 import { PAGES, useAppContext } from "@/context/app";
 import { useChatContext } from "@/context/chat";
 import Select from "@/components/common/select";
@@ -10,16 +11,7 @@ const Header: React.FC = () => {
   const [models, setModels] = useState<{ id: string }[]>([{ id: model }]);
 
   const getModelList = () => {
-    fetch("/api/models", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
+    request.get("/api/models")
       .then((data) => {
         setModels(data.data ?? [{ id: model }]);
       });

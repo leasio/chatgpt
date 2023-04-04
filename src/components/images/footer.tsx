@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import request from "@/utils/request";
 import { useImagesContext } from "@/context/images";
 import Button from "@/components/common/button";
 import Input from "@/components/common/Input"
@@ -12,20 +13,10 @@ const Footer: React.FC = () => {
   const send = () => {
     setPrompt("");
     setIsLoading(true);
-    fetch("/api/images", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-      body: JSON.stringify({
-        ...options,
-        prompt,
-      }),
+    request.post("/api/images", {
+      ...options,
+      prompt,
     })
-      .then((response) => {
-        return response.json();
-      })
       .then((data) => {
         setImages(data.data ?? [{ url: "", alt: data.message }]);
       })

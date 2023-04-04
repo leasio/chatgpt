@@ -3,6 +3,7 @@ import {
   ChatCompletionRequestMessage,
   CreateChatCompletionResponseChoicesInner,
 } from "openai";
+import request from "@/utils/request";
 import { useChatContext } from "@/context/chat";
 import Button from "@/components/common/button";
 import Input from "@/components/common/Input"
@@ -26,20 +27,10 @@ const Footer: React.FC = () => {
     setMessages(_messages);
     serUserCurrentMsg("");
     setIsLoading(true);
-    fetch("/api/chat", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-      body: JSON.stringify({
-        model,
-        messages: _messages,
-      }),
+    request.post("/api/chat", {
+      model,
+      messages: _messages,
     })
-      .then((response) => {
-        return response.json();
-      })
       .then((data) => {
         const newMsg = data.id
           ? data?.choices.map(
@@ -48,6 +39,9 @@ const Footer: React.FC = () => {
           : [{ role: "system", content: data.message }];
 
         setMessages([..._messages, ...newMsg]);
+      })
+      .catch(err => {
+        console.log("err", err.json())
       })
       .finally(() => {
         setIsLoading(false);
