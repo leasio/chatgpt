@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { PAGES, appContext } from "@/context/app";
 import Enter from "@/components/common/enter";
-import Chat from "@/pages/chat";
-import Images from "@/pages/images";
+
+const Chat = React.lazy(() => import("@/pages/chat"))
+const Images = React.lazy(() => import("@/pages/images"))
 
 const PageCompMap = {
   [PAGES.CHAT]: Chat,
