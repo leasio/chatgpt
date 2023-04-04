@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import { PAGES, appContext } from "@/context/app";
 import Enter from "@/components/common/enter";
 
-const Chat = React.lazy(() => import("@/pages/chat"))
-const Images = React.lazy(() => import("@/pages/images"))
-
 const PageCompMap = {
-  [PAGES.CHAT]: Chat,
-  [PAGES.IMAGES]: Images,
+  [PAGES.CHAT]: React.lazy(() => import("@/pages/chat")),
+  [PAGES.IMAGES]: React.lazy(() => import("@/pages/images")),
 };
 
 const App: React.FC = () => {
@@ -17,7 +14,15 @@ const App: React.FC = () => {
   const renderPage = () => {
     const Comp = page && PageCompMap[page];
 
-    return Comp && <Comp />;
+    return Comp && (
+      <React.Suspense fallback={
+        <div className="w-screen h-screen flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full border-4 border-t-gray-300 border-r-gray-300 border-b-blue-400 border-l-blue-400 animate-spin"></div>
+        </div>
+      }>
+        <Comp />
+      </React.Suspense>
+    );
   };
 
   return (
